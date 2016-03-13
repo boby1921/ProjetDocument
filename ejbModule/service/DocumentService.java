@@ -15,7 +15,7 @@ import exception.ServiceException;
 @Remote(IDocumentService.class)
 public class DocumentService implements IDocumentService{
 
-	@EJB
+	@EJB(beanName ="DocumentDao")
 	GenericDao<Document, Integer> documentDao;
 
 	

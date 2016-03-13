@@ -2,14 +2,18 @@ package entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="document")
+@Table(name = "document")
 public class Document implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -19,6 +23,9 @@ public class Document implements Serializable {
 	private String titre;
 	private String description;
 	private int nbExemplaireDispo;
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "idLocalisation", unique = true, nullable = false)
+	private Localisation localisation;
 
 	public Document() {
 	}
@@ -60,6 +67,14 @@ public class Document implements Serializable {
 
 	public void setNbExemplaireDispo(int nbExemplaireDispo) {
 		this.nbExemplaireDispo = nbExemplaireDispo;
+	}
+
+	public Localisation getLocalisation() {
+		return localisation;
+	}
+
+	public void setLocalisation(Localisation localisation) {
+		this.localisation = localisation;
 	}
 
 }
