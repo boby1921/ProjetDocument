@@ -6,39 +6,62 @@ import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
-import dao.IDocumentDao;
+import dao.GenericDao;
 import entity.Document;
+import exception.DAOException;
+import exception.ServiceException;
 
 @Stateless
 @Remote(IDocumentService.class)
 public class DocumentService implements IDocumentService{
-	
+
 	@EJB
-	IDocumentDao documentDao;
+	GenericDao<Document, Integer> documentDao;
+
 	
 	@Override
-	public void createDocument(Document document) {
-		documentDao.createDocument(document);;
+	public void createDocument(Document document) throws ServiceException {
+		try {
+			documentDao.save(document);
+		} catch (DAOException e) {
+			throw new ServiceException();
+		}
 	}
 
 	@Override
-	public void deleteDocument(int cote) {
-		documentDao.deleteDocument(cote);
+	public void deleteDocument(int cote) throws ServiceException {
+		try {
+			documentDao.removeById(cote);
+		} catch (DAOException e) {
+			throw new ServiceException();
+		}
 	}
 
 	@Override
-	public Document findById(int cote) {
-		return documentDao.findById(cote);
+	public Document findById(int cote) throws ServiceException {
+		try {
+			return documentDao.findByID(cote);
+		} catch (DAOException e) {
+			throw new ServiceException();
+		}
 	}
 
 	@Override
-	public void updateDocument(Document document) {
-		documentDao.updateDocument(document);
+	public void updateDocument(Document document) throws ServiceException {
+		try {
+			documentDao.update(document);
+		} catch (DAOException e) {
+			throw new ServiceException();
+		}
 	}
 
 	@Override
-	public List<Document> getAllDocument() {
-		return documentDao.getAllDocument();
+	public List<Document> getAllDocument() throws ServiceException {
+		try {
+			return documentDao.findAll();
+		} catch (DAOException e) {
+			throw new ServiceException();
+		}
 	}
 
 }
