@@ -6,7 +6,6 @@ import javax.ejb.Stateless;
 
 import dao.IDocumentDao;
 import entity.Document;
-import entity.IDocument;
 
 @Stateless
 @LocalBean
@@ -23,7 +22,7 @@ public class GererDocumentService {
 		documentDao.deleteDocument(cote);
 	}
 
-	public IDocument findById(int cote) {
+	public Document findById(int cote) {
 		return documentDao.findById(cote);
 	}
 

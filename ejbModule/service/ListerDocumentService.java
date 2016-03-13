@@ -7,7 +7,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import dao.IDocumentDao;
-import entity.IDocument;
+import entity.Document;
 
 @Stateless
 @LocalBean
@@ -16,7 +16,7 @@ public class ListerDocumentService {
 	@EJB
 	IDocumentDao documentDao;
 	
-	public List<IDocument> getAllDocument() {
+	public List<Document> getAllDocument() {
 		return documentDao.getAllDocument();
 	}
 	

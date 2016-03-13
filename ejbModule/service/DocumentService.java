@@ -7,7 +7,6 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import entity.Document;
-import entity.IDocument;
 
 @Stateless
 @Remote(IDocumentService.class)
@@ -30,7 +29,7 @@ public class DocumentService implements IDocumentService{
 	}
 
 	@Override
-	public IDocument findById(int cote) {
+	public Document findById(int cote) {
 		return gererService.findById(cote);
 	}
 
@@ -40,7 +39,7 @@ public class DocumentService implements IDocumentService{
 	}
 
 	@Override
-	public List<IDocument> getAllDocument() {
+	public List<Document> getAllDocument() {
 		return listerService.getAllDocument();
 	}
 

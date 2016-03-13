@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import entity.IDocument;
+import entity.Document;
 
 @Stateless
 @LocalBean
@@ -17,8 +17,8 @@ public class ListerDocumentDao {
 	@PersistenceContext(unitName="pu")
 	EntityManager em;
 
-	public List<IDocument> getAllDocument() {
-		TypedQuery<IDocument> query = em.createQuery("select d from Document d", IDocument.class);
+	public List<Document> getAllDocument() {
+		TypedQuery<Document> query = em.createQuery("select d from Document d", Document.class);
 		return query.getResultList();
 	}
 

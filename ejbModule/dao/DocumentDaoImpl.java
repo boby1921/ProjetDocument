@@ -7,7 +7,6 @@ import javax.ejb.Local;
 import javax.ejb.Stateless;
 
 import entity.Document;
-import entity.IDocument;
 
 @Stateless
 @Local(IDocumentDao.class)
@@ -30,7 +29,7 @@ public class DocumentDaoImpl implements IDocumentDao {
 	}
 
 	@Override
-	public IDocument findById(int cote) {
+	public Document findById(int cote) {
 		return gererDao.findById(cote);
 	}
 
@@ -40,7 +39,7 @@ public class DocumentDaoImpl implements IDocumentDao {
 	}
 
 	@Override
-	public List<IDocument> getAllDocument() {
+	public List<Document> getAllDocument() {
 		return listerDao.getAllDocument();
 	}
 

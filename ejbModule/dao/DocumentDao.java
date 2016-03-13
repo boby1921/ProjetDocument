@@ -1,19 +1,22 @@
 package dao;
 
-import javax.ejb.LocalBean;
+import java.util.List;
+
+import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import entity.Document;
 
 @Stateless
-@LocalBean
-public class GererDocumentDao {
+@Local(IDocumentDao.class)
+public class DocumentDao implements IDocumentDao {
 
-	@PersistenceContext(unitName="pu")
+	@PersistenceContext(unitName = "pu")
 	EntityManager em;
-	
+
 	public void createDocument(Document document) {
 		em.persist(document);
 	}
@@ -30,4 +33,10 @@ public class GererDocumentDao {
 	public void updateDocument(Document document) {
 		em.merge(document);
 	}
+
+	public List<Document> getAllDocument() {
+		TypedQuery<Document> query = em.createQuery("select d from Document d", Document.class);
+		return query.getResultList();
+	}
+
 }
