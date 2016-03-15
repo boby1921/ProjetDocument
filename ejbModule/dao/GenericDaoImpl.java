@@ -25,7 +25,7 @@ public class GenericDaoImpl<T, K> implements GenericDao<T, K> {
 		try {
 			em.persist(t);
 		} catch (Exception e) {
-			throw new DAOException();
+			throw new DAOException("Erreur persist dao");
 		}
 		return t;
 	}
@@ -35,7 +35,7 @@ public class GenericDaoImpl<T, K> implements GenericDao<T, K> {
 		try {
 			em.merge(t);
 		} catch (Exception e) {
-			throw new DAOException();
+			throw new DAOException("Erreur update dao");
 		}
 		return t;
 	}
@@ -45,7 +45,7 @@ public class GenericDaoImpl<T, K> implements GenericDao<T, K> {
 		try {
 			em.remove(t);
 		} catch (Exception e) {
-			throw new DAOException();
+			throw new DAOException("erreur remove dao");
 		}
 	}
 
@@ -54,7 +54,7 @@ public class GenericDaoImpl<T, K> implements GenericDao<T, K> {
 		try {
 			em.createQuery("delete from " + entity.getSimpleName() + " where id = " + id).executeUpdate();
 		} catch (Exception e) {
-			throw new DAOException();
+			throw new DAOException("erreur removebyid dao");
 		}
 
 	}
@@ -64,7 +64,7 @@ public class GenericDaoImpl<T, K> implements GenericDao<T, K> {
 		try {
 			return em.find(entity, id);
 		} catch (PersistenceException e) {
-			throw new DAOException();
+			throw new DAOException("erreur findbyid dao");
 		}
 	}
 
@@ -75,7 +75,7 @@ public class GenericDaoImpl<T, K> implements GenericDao<T, K> {
 			TypedQuery<T> query = em.createQuery("select t from " + entity.getSimpleName() + " t", entity);
 			return query.getResultList();
 		} catch (PersistenceException e) {
-			throw new DAOException();
+			throw new DAOException("erreur findAll dao");
 		}
 	}
 

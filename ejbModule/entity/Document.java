@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -24,8 +25,11 @@ public class Document implements Serializable {
 	private String description;
 	private int nbExemplaireDispo;
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "idLocalisation", unique = true, nullable = false)
+	@JoinColumn(name = "idLocalisation", unique = true, nullable = true)
 	private Localisation localisation;
+	@ManyToOne
+	@JoinColumn(name = "idAuteur")
+	private Auteur auteur;
 
 	public Document() {
 	}
@@ -35,6 +39,15 @@ public class Document implements Serializable {
 		this.titre = titre;
 		this.description = description;
 		this.nbExemplaireDispo = nbExemplaireDispo;
+	}
+
+	public Document(String titre, String description, int nbExemplaireDispo, Localisation localisation, Auteur auteur) {
+		super();
+		this.titre = titre;
+		this.description = description;
+		this.nbExemplaireDispo = nbExemplaireDispo;
+		this.localisation = localisation;
+		this.auteur = auteur;
 	}
 
 	public int getCote() {
@@ -75,6 +88,14 @@ public class Document implements Serializable {
 
 	public void setLocalisation(Localisation localisation) {
 		this.localisation = localisation;
+	}
+
+	public Auteur getAuteur() {
+		return auteur;
+	}
+
+	public void setAuteur(Auteur auteur) {
+		this.auteur = auteur;
 	}
 
 }
