@@ -6,7 +6,7 @@ import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
-import dao.GenericDao;
+import dao.Autdao;
 import entity.Auteur;
 import exception.DAOException;
 import exception.ServiceException;
@@ -15,13 +15,16 @@ import exception.ServiceException;
 @Remote(IAuteurService.class)
 public class AuteurService implements IAuteurService{
 
-	@EJB(beanName ="AuteurDao")
-	GenericDao<Auteur, Integer> auteurDao;
+//	@EJB(beanName ="AuteurDao")
+//	GenericDao<Auteur, Integer> auteurDao;
 
+	@EJB
+	Autdao auteurDao;
 	
 	@Override
 	public void createAuteur(Auteur auteur) throws ServiceException {
 		try {
+			System.out.println(auteurDao.alreadyExist(auteur));
 			auteurDao.save(auteur);
 		} catch (DAOException e) {
 			throw new ServiceException();
