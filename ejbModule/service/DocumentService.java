@@ -6,7 +6,7 @@ import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
-import dao.GenericDao;
+import dao.DocumentDao;
 import entity.Document;
 import exception.DAOException;
 import exception.ServiceException;
@@ -15,8 +15,11 @@ import exception.ServiceException;
 @Remote(IDocumentService.class)
 public class DocumentService implements IDocumentService{
 
-	@EJB(beanName ="DocumentDao")
-	GenericDao<Document, Integer> documentDao;
+//	@EJB(beanName ="DocumentDao")
+//	GenericDao<Document, Integer> documentDao;
+	
+	@EJB
+	DocumentDao documentDao;
 
 	
 	@Override

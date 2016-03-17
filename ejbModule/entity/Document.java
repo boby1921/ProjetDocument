@@ -1,6 +1,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -30,6 +33,12 @@ public class Document implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "idAuteur")
 	private Auteur auteur;
+	@ManyToMany
+	@JoinTable(name="doc_theme", 
+			joinColumns = @JoinColumn(name="idDocument"),
+			inverseJoinColumns = @JoinColumn(name="idTheme")
+	)
+	private List<Theme> themes;
 
 	public Document() {
 	}

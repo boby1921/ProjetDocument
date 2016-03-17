@@ -1,24 +1,13 @@
 package dao;
 
-import javax.ejb.Local;
-import javax.ejb.Stateless;
-import javax.persistence.TypedQuery;
+import java.util.List;
 
 import entity.Auteur;
+import entity.Document;
 
-@Stateless
-@Local(GenericDao.class)
-public class AuteurDao extends GenericDaoImpl<Auteur, Integer>{
+public interface AuteurDao extends GenericDao<Auteur, Integer> {
 
-	public AuteurDao() {
-		super(Auteur.class);
-		
-	}
-
-	public Boolean alreadyExist(Auteur auteur) {
-		TypedQuery<Auteur> query = em.createQuery("select a from Auteur a where a.nom = :nom", Auteur.class);
-		query.setParameter("nom", auteur.getNom());
-		
-		return query.getResultList().size() > 0;
-	}
+	public Boolean alreadyExist(Auteur auteur);
+	public List<Document> getDocumentByAuteur(Auteur auteur);
+	
 }

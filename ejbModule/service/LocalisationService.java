@@ -6,7 +6,7 @@ import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
-import dao.GenericDao;
+import dao.LocalisationDao;
 import entity.Localisation;
 import exception.DAOException;
 import exception.ServiceException;
@@ -15,8 +15,11 @@ import exception.ServiceException;
 @Remote(ILocalisationService.class)
 public class LocalisationService implements ILocalisationService{
 
-	@EJB(beanName ="LocalisationDao")
-	GenericDao<Localisation, Integer> localisationDao;
+//	@EJB(beanName ="LocalisationDao")
+//	GenericDao<Localisation, Integer> localisationDao;
+	
+	@EJB
+	LocalisationDao localisationDao;
 	
 	@Override
 	public void createLocalisation(Localisation localisation) throws ServiceException {
